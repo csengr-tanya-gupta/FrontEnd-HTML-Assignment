@@ -1,0 +1,96 @@
+<p>first-component works!</p>
+<h1>Component</h1>
+<h1 [style]="style" [hidden]="isHidden">{{name}}</h1>
+
+<button (click)="click()">Click me</button>
+
+<div class="names-container">
+  <button (click)="prev()" class="nav-button">Prev</button>
+  <h2 class="current-name">{{currentName}}</h2>
+  <button (click)="next()" class="nav-button">Next</button>
+</div>
+
+<h1>{{ipVal}}</h1>
+
+<input type="text" (input)="inputValChange($event.target.value)" placeholder="Type something...">
+
+<input type="text" [(ngModel)]="ipVal" placeholder="Two-way bound input...">
+
+<app-child-comp [nameP]="nameP" [buttonText]="buttonText" (notify)="receiveData($event)"></app-child-comp>
+
+<h2>Child sent: {{ receivedFromChild }}</h2>
+
+<h1 [ngClass]="{
+  classA : applyClass,
+  classB : !applyClass
+}" [ngStyle]="{ color: 'yellow' }">NG CLASS</h1>
+<button (click) = "shouldApply()">Click to change classes</button>
+<div></div>
+<div></div>
+<h1 *ngIf="applyClass">NG CLASS</h1>
+<button (click) = "shouldApply()">Click to change classes</button>
+<div></div>
+@if(applyClass){
+  <h1>condition is true</h1>
+}
+@else{
+  <h1>condition is false</h1>
+}
+<button (click) = "shouldApply()">Click to change classes</button>
+
+<ul>
+  @for (item of arr; track item) {
+    <li>{{item}}</li>
+  }
+  @empty {
+    <h1>No items found</h1>
+  }
+</ul>
+
+<ol *ngFor="let item of arr">
+  <li>{{item}}</li>
+</ol>
+
+<h2>Table using for</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Index</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of arr; track item; let i = $index) {
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>{{ item }}</td>
+      </tr>
+    }
+    @empty {
+      <tr>
+        <td colspan="2">No items found</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<h2>Table using *ngFor</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Index</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of arr; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ item }}</td>
+    </tr>
+    <tr *ngIf="arr.length === 0">
+      <td colspan="2">No items found</td>
+    </tr>
+  </tbody>
+</table>
+
+<app-child-comp>123654789</app-child-comp>
